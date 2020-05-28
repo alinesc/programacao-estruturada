@@ -16,6 +16,15 @@ struct ficha {
     char redeSocial [50];
 };
 
+int procurar (char procurado[], struct ficha vetor [], int num_fichas){
+    int i;
+    for (i=0; i<num_fichas; i++) {
+        if (strcmp(procurado, vetor[i].nome) == 0){
+            return i;
+        }
+    }
+    return -1;
+}
 
 
 int main(int argc, const char * argv[]) {
@@ -58,17 +67,14 @@ int main(int argc, const char * argv[]) {
             printf("\nEntre com o nome procurado: ");
             fgets(procurado, 40, stdin);
             
-            bool achei = false;
-            int i;
-            for (i=0; i<fichas_existentes; i++) {
-                if (strcmp(procurado, amigos[i].nome) == 0){
-                    achei = true;
-                    printf("\n\nO telefone de %s é %s, endereco %s, email %s, idade %d e Instagram %s \n", amigos[i].nome, amigos[i].telefone, amigos[i].endereco, amigos[i].email, amigos[i].idade, amigos[i].redeSocial );
-                    break;
-                }
-                if (achei == false){
-                    printf("\nNome não encontrado. ");                }
+            int indice = procurar(procurado, amigos, fichas_existentes);
+            if (indice == -1) {
+                printf("\nNome não encontrado. ");
             }
+            else {
+                printf("\n\nO telefone de %s é %s, endereco %s, email %s, idade %d e Instagram %s \n", amigos[indice].nome, amigos[indice].telefone, amigos[indice].endereco, amigos[indice].email, amigos[indice].idade, amigos[indice].redeSocial );
+            }
+            
         }
         if (opcao[0] == '3'){
             printf("\n\n");
@@ -85,26 +91,20 @@ int main(int argc, const char * argv[]) {
             printf("\nEntre com o nome que será excluído: ");
             fgets(procurado, 40, stdin);
             
-            bool achei = false;
-            int i;
-            for (i=0; i<fichas_existentes; i++) {
-                if (strcmp(procurado, amigos[i].nome) == 0){
-                    achei = true;
-                    printf("\n\nO telefone de %s é %s, endereco %s, email %s, idade %d e Instagram %s, será removido \n", amigos[i].nome, amigos[i].telefone, amigos[i].endereco, amigos[i].email, amigos[i].idade, amigos[i].redeSocial );
-                    int j;
-                    for (j = i+1; j<fichas_existentes; j++){
-                        amigos[j-1] = amigos[j];
-                    }
+            int indice = procurar(procurado, amigos, fichas_existentes);
+            if (indice == -1) {
+                printf("\nNome não encontrado. ");
+            }
+            else {
+                printf("\n\nO telefone de %s é %s, endereco %s, email %s, idade %d e Instagram %s, será removido \n", amigos[indice].nome, amigos[indice].telefone, amigos[indice].endereco, amigos[indice].email, amigos[indice].idade, amigos[indice].redeSocial );
+                int j;
+                for (j = indice+1; j<fichas_existentes; j++){
+                    amigos[j-1] = amigos[j];
                     fichas_existentes --;
                     proxima--;
-                    break;
                 }
-                if (achei == false){
-                    printf("\nNome não encontrado. ");                }
             }
         }
     }
-    
-
     return 0;
-}
+    }
