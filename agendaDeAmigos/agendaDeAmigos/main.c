@@ -16,14 +16,14 @@ struct ficha {
     char redeSocial [50];
 };
 
-int procurar (char procurado[], struct ficha vetor [], int num_fichas){
-    int i;
-    for (i=0; i<num_fichas; i++) {
-        if (strcmp(procurado, vetor[i].nome) == 0){
-            return i;
-        }
+int procurarRecursivo (char procurado[], struct ficha vetor [], int num_fichas, int indiceInicio){
+    if (indiceInicio >= num_fichas) return -1;
+    else if (strcmp (procurado, vetor[indiceInicio].nome) == 0){
+        return indiceInicio;
     }
-    return -1;
+    else {
+        return procurarRecursivo(procurado, vetor, num_fichas, indiceInicio + 1);
+    }
 }
 
 
@@ -67,7 +67,7 @@ int main(int argc, const char * argv[]) {
             printf("\nEntre com o nome procurado: ");
             fgets(procurado, 40, stdin);
             
-            int indice = procurar(procurado, amigos, fichas_existentes);
+            int indice = procurarRecursivo(procurado, amigos, fichas_existentes, 0);
             if (indice == -1) {
                 printf("\nNome não encontrado. ");
             }
@@ -91,7 +91,7 @@ int main(int argc, const char * argv[]) {
             printf("\nEntre com o nome que será excluído: ");
             fgets(procurado, 40, stdin);
             
-            int indice = procurar(procurado, amigos, fichas_existentes);
+            int indice = procurarRecursivo(procurado, amigos, fichas_existentes, 0);
             if (indice == -1) {
                 printf("\nNome não encontrado. ");
             }
