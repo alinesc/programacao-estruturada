@@ -96,9 +96,9 @@ int main(int argc, const char * argv[]) {
                 printf("\nNome não encontrado. ");
             }
             else {
-                printf("\n\nO telefone de %s é %s, endereco %s, email %s, idade %d e Instagram %s, será removido \n", amigos[indice].nome, amigos[indice].telefone, amigos[indice].endereco, amigos[indice].email, amigos[indice].idade, amigos[indice].redeSocial );
+                printf("\n\nO telefone de %s, %s, endereco %s, email %s, idade %d e Instagram %s, será removido \n", amigos[indice].nome, amigos[indice].telefone, amigos[indice].endereco, amigos[indice].email, amigos[indice].idade, amigos[indice].redeSocial );
                 int j;
-                for (j = indice+1; j<fichas_existentes; j++){
+                for (j = indice+1; j<=fichas_existentes; j++){
                     amigos[j-1] = amigos[j];
                     fichas_existentes --;
                     proxima--;
