@@ -97,12 +97,9 @@ int main(int argc, const char * argv[]) {
             }
             else {
                 printf("\n\nO telefone de %s, %s, endereco %s, email %s, idade %d e Instagram %s, será removido \n", amigos[indice].nome, amigos[indice].telefone, amigos[indice].endereco, amigos[indice].email, amigos[indice].idade, amigos[indice].redeSocial );
-                int j;
-                for (j = indice+1; j<=fichas_existentes; j++){
-                    amigos[j-1] = amigos[j];
-                    fichas_existentes --;
-                    proxima--;
-                }
+                amigos[indice] = amigos[fichas_existentes -1];
+                fichas_existentes --;
+                proxima --;
             }
         }
     }
