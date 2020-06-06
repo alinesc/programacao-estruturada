@@ -18,7 +18,7 @@ struct ficha {
 
 int procurarRecursivo (char procurado[], struct ficha vetor [], int num_fichas, int indiceInicio){
     if (indiceInicio >= num_fichas) return -1;
-    else if (strcmp (procurado, vetor[indiceInicio].nome) == 0){
+    else if (strcasestr (vetor[indiceInicio].nome, procurado) != NULL){
         return indiceInicio;
     }
     else {
@@ -48,6 +48,7 @@ int main(int argc, const char * argv[]) {
         if (opcao[0] == '1') {
             printf("\nEntre com um nome: ");
             fgets(amigos[proxima].nome, 40, stdin);
+            strtok(amigos[proxima].nome, "\n");
             printf("\nEntre com um telefone: ");
             fgets(amigos[proxima].telefone, 40, stdin);
             printf("\nEntre com um endereco: ");
@@ -66,6 +67,7 @@ int main(int argc, const char * argv[]) {
             char procurado[40];
             printf("\nEntre com o nome procurado: ");
             fgets(procurado, 40, stdin);
+            strtok(procurado, "\n");
             
             int indice = procurarRecursivo(procurado, amigos, fichas_existentes, 0);
             if (indice == -1) {
@@ -90,6 +92,7 @@ int main(int argc, const char * argv[]) {
             char procurado[40];
             printf("\nEntre com o nome que será excluído: ");
             fgets(procurado, 40, stdin);
+            strtok(procurado, "\n");
             
             int indice = procurarRecursivo(procurado, amigos, fichas_existentes, 0);
             if (indice == -1) {
